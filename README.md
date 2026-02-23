@@ -33,9 +33,14 @@ Distribuição Geográfica: Identificação de que o estado de SP lidera as vend
 
 Sazonalidade: Identificação de picos de visitas no começo da semana e uma queda aos finais de semanas.
 
-[Projeto Análise de Vendas.pdf](https://github.com/user-attachments/files/25501457/Projeto.Analise.de.Vendas.pdf)
+[Projeto Análise de Vendas.pdf](https://github.com/user-attachments/files/25502709/Projeto.Analise.de.Vendas.pdf)
 
-<img width="1103" height="596" alt="image" src="https://github.com/user-attachments/assets/646d64ab-8e86-4837-8a33-942b009885cd" />
+<img width="1102" height="590" alt="Projeto Análise de Vendas" src="https://github.com/user-attachments/assets/e1ff2fdb-9148-45c5-b33b-b77010e39ed3" />
+
+
+
+Créditos:
+Projeto desenvolvido para fins de estudo e prática, baseado no curso de SQL para Análise de Dados ministrado pela professora Midori Toyota.
 
 
 
