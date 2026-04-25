@@ -1,48 +1,96 @@
-# Analise-Dados-PostgreSQL
+# 📊 Análise de Funil de Vendas — SQL, PostgreSQL & Dashboard Excel
 
-Análise de Funil de Vendas e Performance com SQL (PostgreSQL)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white)
 
-📋 Sobre o Projeto
+## 🎯 Problema de Negócio
 
-Este projeto consiste na extração e análise de dados de um funil de vendas fictício para identificar padrões de comportamento de clientes, performance de vendas por região e marcas, e eficiência de conversão. O objetivo foi transformar dados brutos armazenados em um banco PostgreSQL em indicadores de negócio (KPIs) prontos para visualização.
+Uma empresa do setor automotivo precisa entender a eficiência do seu funil de vendas: quantos leads chegam, quantos convertem, qual o ticket médio e como essas métricas variam ao longo do tempo, por região e por marca. O objetivo foi extrair esses KPIs a partir de dados brutos no PostgreSQL e transformá-los em um dashboard executivo no Excel para apoiar decisões comerciais.
 
-🛠️ Tecnologias Utilizadas
+## 📊 Dashboard
 
-Banco de Dados: PostgreSQL
-Interface: pgAdmin 4
-Linguagem: SQL
-Visualização: Excel (Gráficos e Dashboards) 
+![Dashboard Preview](Projeto%20Análise%20de%20Vendas.png)
 
-🔍 Principais Análises Realizadas (Queries)
+[📄 Ver relatório completo em PDF](Projeto%20Análise%20de%20Vendas.pdf)
 
-KPIs Mensais: Cálculo de Receita, Leads, Taxa de Conversão e Ticket Médio utilizando WITH (CTE) e DATE_TRUNC.
+## 🛠️ Tecnologias Utilizadas
 
-Geolocalização: Identificação dos estados com maior volume de vendas para direcionamento de marketing.
+| Ferramenta | Uso |
+|---|---|
+| PostgreSQL | Banco de dados relacional |
+| SQL (CTEs, Joins, EXTRACT) | Extração e transformação dos dados |
+| pgAdmin 4 | Interface de desenvolvimento SQL |
+| Microsoft Excel | Dashboard e visualização final |
 
-Performance de Portfólio: Ranking de marcas e lojas mais vendidas através de LEFT JOIN entre as tabelas de produtos e vendas.
+## 🔍 Análises Realizadas
 
-Sazonalidade Semanal: Análise dos dias da semana com maior tráfego no site utilizando a função EXTRACT('dow').
+### KPIs Mensais
+Cálculo de Receita Total, Volume de Leads, Taxa de Conversão e Ticket Médio utilizando `WITH (CTE)` e `DATE_TRUNC` para agrupamento temporal.
 
-📈 Visualização de Dados
+```sql
+-- Exemplo de estrutura utilizada
+WITH metricas_mensais AS (
+  SELECT
+    DATE_TRUNC('month', data_venda) AS mes,
+    COUNT(DISTINCT lead_id)         AS leads,
+    COUNT(DISTINCT venda_id)        AS vendas,
+    SUM(valor)                      AS receita
+  FROM vendas
+  GROUP BY 1
+)
+SELECT
+  mes,
+  leads,
+  vendas,
+  ROUND(vendas::numeric / leads * 100, 2) AS taxa_conversao,
+  ROUND(receita / NULLIF(vendas, 0), 2)   AS ticket_medio
+FROM metricas_mensais
+ORDER BY mes;
+```
 
-Os dados extraídos via SQL foram exportados para o Excel, onde realizei o tratamento final e a criação de um Dashboard contemplando:
+### Geolocalização de Vendas
+Identificação dos estados com maior volume de conversões — São Paulo lidera com 2.463 unidades — para direcionamento de estratégias de marketing regional.
 
-Análise de Funil: Visualização da jornada desde o Lead até a Conversão.
+### Performance de Portfólio
+Ranking de marcas e lojas mais vendidas utilizando `LEFT JOIN` entre tabelas de produtos e vendas, revelando os top 5 performers em cada categoria.
 
-Distribuição Geográfica: Identificação de que o estado de SP lidera as vendas com 2.463 unidades.
+### Sazonalidade Semanal
+Análise dos dias da semana com maior tráfego no site usando `EXTRACT('dow')`, identificando segundas e terças-feiras como picos de engajamento e finais de semana com queda acentuada.
 
-Sazonalidade: Identificação de picos de visitas no começo da semana e uma queda aos finais de semanas.
+## 📈 Principais Insights
 
-[Projeto Análise de Vendas.pdf](https://github.com/user-attachments/files/25502709/Projeto.Analise.de.Vendas.pdf)
+| Insight | Resultado |
+|---|---|
+| Estado líder em vendas | São Paulo — 2.463 unidades |
+| Dias de pico de tráfego | Segunda e terça-feira |
+| Padrão de fim de semana | Queda significativa de visitas |
+| Métrica central de negócio | Taxa de conversão por mês |
 
-<img width="1102" height="590" alt="Projeto Análise de Vendas" src="https://github.com/user-attachments/assets/e1ff2fdb-9148-45c5-b33b-b77010e39ed3" />
+## 📂 Estrutura do Repositório
 
+```
+📁 Analise-Dados-PostgreSQL/
+├── Análise de Funil de Vendas com SQL.sql   # Queries completas
+├── Projeto Análise de Vendas.xlsx           # Dashboard Excel
+└── Projeto Análise de Vendas.pdf            # Relatório exportado
+```
 
+## 🚀 Como Executar
 
-Créditos:
-Projeto desenvolvido para fins de estudo e prática, baseado no curso de SQL para Análise de Dados ministrado pela professora Midori Toyota.
+1. Importe o dataset para uma tabela no PostgreSQL via pgAdmin
+2. Execute as queries do arquivo `.sql` na ordem apresentada
+3. Exporte os resultados para Excel
+4. Abra o arquivo `.xlsx` para visualizar o dashboard final
 
+## 📌 Aprendizados Técnicos
 
+- Uso de CTEs (`WITH`) para organizar consultas complexas em etapas legíveis
+- Aplicação de `DATE_TRUNC` e `EXTRACT` para análise temporal e sazonalidade
+- `LEFT JOIN` para cruzamento de tabelas preservando registros sem correspondência
+- Construção de dashboard executivo no Excel a partir de dados exportados do PostgreSQL
 
+---
 
-
+*Projeto desenvolvido como parte do MBA em Data Science e Analytics — USP/ESALQ*  
+*Baseado no curso de SQL para Análise de Dados ministrado pela professora Midori Toyota*
