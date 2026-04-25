@@ -10,7 +10,7 @@ Uma empresa do setor automotivo precisa entender a eficiência do seu funil de v
 
 ## 📊 Dashboard
 
-![Dashboard Preview](Projeto%20Análise%20de%20Vendas.png)
+<img width="1102" height="590" alt="projeto" src="https://github.com/user-attachments/assets/fb65db89-db66-4acc-a196-f5ffcfc52c6c" />
 
 [📄 Ver relatório completo em PDF](Projeto%20Análise%20de%20Vendas.pdf)
 
