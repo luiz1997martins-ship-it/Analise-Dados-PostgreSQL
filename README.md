@@ -92,5 +92,4 @@ Análise dos dias da semana com maior tráfego no site usando `EXTRACT('dow')`, 
 
 ---
 
-*Projeto desenvolvido como parte do MBA em Data Science e Analytics — USP/ESALQ*  
 *Baseado no curso de SQL para Análise de Dados ministrado pela professora Midori Toyota*
